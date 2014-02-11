@@ -1,0 +1,42 @@
+<!-- ======================================================================= -->
+<!--                                                                         -->
+<!--        This is a html file to test directives                           -->
+<!--                                                                         -->
+<!-- ======================================================================= -->
+		
+
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Custom Directive</title>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css"/>
+    <!-- jQuery ================================================================ -->
+	<script src="js/lib/jquery.js"></script>
+	
+	<!-- Bootstrap ============================================================= -->
+	<script src="js/lib/bootstrap.js"></script>
+	
+	<!-- AngularJS ============================================================= -->
+	<script src="js/lib/angular.js"></script>
+	
+	<!-- AngularJS App Code ==================================================== -->
+	<script src="js/app.js"></script>
+	<script src="js/directive_isolate_scope.js"></script>
+</head>
+<body ng-controller="Demo">
+
+Please type a name to see how custom directive works: <input ng-model="name" />
+<hr>
+<div demo-greet title="{{name}}"></div>
+<hr>
+<pre>
+	
+	name={{name}}
+
+</pre>
+
+</body>
+</html>
