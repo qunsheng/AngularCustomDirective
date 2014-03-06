@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" ng-app="APP">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1 namer="" data-first="Joe" data-last="Maddalone"></h1>
+	<h1 namer="" data-first="Mr" data-last="Spartacus"></h1>
+	<h1 namer="" data-first="Jim" data-last="Smith"></h1>
+	<h1 namer="" data-first="John" data-last="Jones"></h1>
+	<!-- AngularJS ============================================================= -->
+	<script src="js/lib/angular.js"></script>
+	<script>
+		angular.module('namer',[])
+		.directive('namer',function(){
+			return {
+				scope:{},
+				restrict:'A',
+				link:function(scope,e,a){
+					scope.fullName = a.first + ' ' + a.last
+					scope.first=a.first
+					scope.last=a.last
+				},
+				template:"{{last}}, {{first}}"
+			}
+		})
+		var APP = angular.module('APP',['namer']);
+	</script>
+</body>
+</html>
