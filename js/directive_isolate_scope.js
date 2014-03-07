@@ -17,6 +17,10 @@ myApp.directive('demoGreet', function($parse){
 		 * But create an isolated scope as following is more useful.
 		 * equal sign means two way binding with scope above
 		 * the first title is local variable, the second tile is title attribute
+		 * There are 3 types of binding options:
+		 * Text Binding (Prefix: @)
+		 * One-way Binding (Prefix: &)
+		 * Two-way Binding (Prefix: =)
 		 * 
 		 **************************************************************/ 
 		scope:{
