@@ -10,7 +10,7 @@
 myApp.directive('demoGreet', function($parse){
 	return {
 
-		/************************************************************** 
+		/************************************************************* 
 		 * 
 		 * This is an isolate scope
 		 * Another option is to use 'scope: true' to create a child scope of current scope,
