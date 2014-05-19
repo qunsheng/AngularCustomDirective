@@ -1,0 +1,59 @@
+<html ng-app="myapp">
+	<head>
+		<script src="http://code.angularjs.org/1.2.16/angular.min.js"></script>
+		<script src="http://code.angularjs.org/1.2.16/angular-resource.min.js"></script>
+		<script type="text/javascript">
+			var myapp = angular.module('myapp', []);
+			
+			myapp.controller('MainCtrl', function ($scope) {
+			    $scope.showContent = function($fileContent){
+			    	console.log("show content called, $fileContent", $fileContent);
+			        $scope.content = $fileContent;
+			    };
+			  });
+		
+			myapp.directive('onReadFile', function ($parse) {
+				return {
+					restrict: 'A',
+					scope: false,
+					link: function(scope, element, attrs) {
+						// using $parse to convert dom string to a function						
+			            var fn = $parse(attrs.onReadFile);
+			            
+						element.on('change', function(onChangeEvent) {
+							var reader = new FileReader();
+			                
+							reader.onload = function(onLoadEvent) {
+								scope.$apply(function() {
+									//
+									// call the function with two arguments:
+									// 1) A context is scope. 
+									// I.e. call the showContent($fileContent) function of the scope.
+									// 2) A JSON object which content will replace the variables
+									// that has the same name on the context. 
+									// This way we will be able to override the values of the function arguments.
+									//		
+									fn(scope, {$fileContent:onLoadEvent.target.result});
+								});
+							};
+			
+							// get file and call reader's readAsText
+							reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+						});
+					}
+				};
+			});
+		</script>
+	</head>
+
+	<body>
+		<div ng-controller="MainCtrl" class="container">
+		  <h1>Select text file</h1>
+		    <input type="file" on-read-file="showContent($fileContent)" />
+		    <div ng-if="content">
+		        <h2>File content is:</h2>
+		        <pre>{{ content }}</pre>
+		    </div>
+		</div>
+	</body>
+</html>
