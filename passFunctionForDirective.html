@@ -1,0 +1,49 @@
+<html ng-app="MyApp">
+	<head>
+		<script src="http://code.angularjs.org/1.2.16/angular.min.js"></script>
+		<script src="http://code.angularjs.org/1.2.16/angular-resource.min.js"></script>
+		<script type="text/javascript">var myApp = angular.module('MyApp',[])
+			myApp.directive('editkeyvalue', function() {
+			    return {
+			        restrict: 'E',
+			        replace: true,
+			        scope: {
+			            key: '=',
+			            value: '=',
+			            accept: "&"
+			        },
+			        template : '<div><label class="control-label">{{key}}</label>' +
+			        '<label class="control-label">{{key}}</label>' +
+			          '<input type="text" ng-model="value" />'+
+			        '<button type="button" x-ng-click="cancel()">CANCEL</button>' +
+			        '<button type="submit" x-ng-click="save()">SAVE</button></div>',
+			
+			      controller: function($scope, $element, $attrs, $location) {        
+			        $scope.save= function() {
+			          console.log('from directive', $scope);    
+			          $scope.accept("xxxxxxxxxxxxxx");
+			        };
+			      }
+			    }
+			});
+			      
+			
+			myApp.controller('MyController', function($scope, $window) {
+			    $scope.keyA = 'AA';
+			    $scope.valueA= 'BB';
+			    $scope.blabla = function(msg) { 
+			        console.log('from controller', $scope.keyA, $scope.valueA);    
+			        $window.alert('hello ' + msg);
+			    };
+			});
+
+		</script>
+	</head>
+
+	<body>
+
+	    <div ng-controller="MyController">
+	        <editkeyvalue accept="blabla('from directive')" key='keyA' value='valueA' ></editkeyvalue>
+	    </div>
+	</body>
+</html>
